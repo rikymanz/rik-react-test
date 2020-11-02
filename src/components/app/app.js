@@ -3,6 +3,12 @@ import './app.css';
 // componenti figli
 import Button from './../button/button'
 import Display from './../display/display'
+import List from '../list/list'
+// componente HoC
+import withData from '../hoc/withData/withData';
+
+// componente Hoc adattato alla chiamata specifica necessaria
+const ListWithGists = withData( List , 'https://api.github.com/users/gaearon/gists' );
 
 const App = () => {
   // variabile si stato - ogni volta che viene modificata con setContatore il componente viene renderizzato
@@ -20,6 +26,8 @@ const App = () => {
       {/* Pulsanti - funzioni passate come parametro. Poi messe onClick nel componente */}
       <Button func={incrementCont} name={`Increment ${contatore + 1}`} />
       <Button func={decrementCont} name={`Decrement ${contatore - 1}`} />
+      {/* Componente List con l'aggiunta dei dati presi dall url */}
+      <ListWithGists />
     </div>
   );
 }
