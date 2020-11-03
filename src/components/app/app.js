@@ -1,14 +1,20 @@
 import React ,{ useState} from 'react';
+import { connect } from 'react-refetch';
 import './app.css';
 // componenti figli
 import Button from './../button/button'
 import Display from './../display/display'
 import List from '../list/list'
 // componente HoC
-import withData from '../hoc/withData/withData';
+//import withData from '../hoc/withData/withData';
 
 // componente Hoc adattato alla chiamata specifica necessaria
-const ListWithGists = withData( List , 'https://api.github.com/users/gaearon/gists' );
+//const ListWithGists = withData( List , 'https://api.github.com/users/gaearon/gists' );
+// connect utilizzbile al posto del componente HoC
+const connectWithGists = connect(() => ({
+  data:'https://api.github.com/users/gaearon/gists'
+}))
+const ListWithGists = connectWithGists(List)
 
 const App = () => {
   // variabile si stato - ogni volta che viene modificata con setContatore il componente viene renderizzato
