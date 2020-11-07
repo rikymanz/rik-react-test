@@ -3,6 +3,8 @@ import './app.css';
 // componenti figli
 import PageCont from '../pages/pageCont/pageCont'
 import PageList from '../pages/pageList/pageList'
+import PageForm from '../pages/pageForm/pageForm'
+
 import NavBar from '../children/navBar/navBar'
 
 const App = () =>{
@@ -18,7 +20,9 @@ const App = () =>{
     // pagina 1 - pageCont
     { id:1, func:()=>setPage(1), name:'Contatore' },
     // pagina 2 - PageList
-    { id:2, func:()=>setPage(2), name:'Lista con fetch' }
+    { id:2, func:()=>setPage(2), name:'Lista con fetch' },
+    // pagina 3 - PageForm
+    { id:3, func:()=>setPage(3), name:'Form' }
   ];
   
   return(
@@ -29,6 +33,8 @@ const App = () =>{
       {page == 1 && <PageCont />}
       {/* Componente List con l'aggiunta dei dati presi dall url */}
       {page == 2 && <PageList />}
+      {/* Componente List con l'aggiunta dei dati presi dall url */}
+      {page == 3 && <PageForm />}
     </div>
   );
 }
