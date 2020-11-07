@@ -1,39 +1,34 @@
-import React ,{ useState} from 'react';
-import { connect } from 'react-refetch';
+import React , {useState} from 'react';
 import './app.css';
 // componenti figli
-import Button from './../button/button'
-import Display from './../display/display'
-import List from '../list/list'
-// componente HoC
-//import withData from '../hoc/withData/withData';
+import PageCont from '../pages/pageCont/pageCont'
+import PageList from '../pages/pageList/pageList'
+import NavBar from '../children/navBar/navBar'
 
-// componente Hoc adattato alla chiamata specifica necessaria
-//const ListWithGists = withData( List , 'https://api.github.com/users/gaearon/gists' );
-// connect utilizzbile al posto del componente HoC
-const connectWithGists = connect(() => ({
-  data:'https://api.github.com/users/gaearon/gists'
-}))
-const ListWithGists = connectWithGists(List)
-
-const App = () => {
-  // variabile si stato - ogni volta che viene modificata con setContatore il componente viene renderizzato
-  const [contatore, setContatore] = useState(0);
-  // creazione funzioni incremento e decremento - facilita la lettura
-  const decrementCont = () => setContatore( contatore - 1 );
-  const incrementCont = () => setContatore( contatore + 1 );
-  // rendering
-  return (
+const App = () =>{
+  // pagina selezionata - alla modifica viene fatto il refresh dell'applicazione
+  const [page, setPage] = useState(1);
+  /**
+   * Arrai di oggetti che gestiscono la navbar
+   *  - id: pagina corrispondente impostata in page
+   *  - func : funzione chiamata al premere del relativo pulsante
+   *  - name : nome nella navbar
+   */
+  let navBarConf = [
+    // pagina 1 - pageCont
+    { id:1, func:()=>setPage(1), name:'Contatore' },
+    // pagina 2 - PageList
+    { id:2, func:()=>setPage(2), name:'Lista con fetch' }
+  ];
+  
+  return(
     <div className="App">
-      {/* Visualizzazione diretta della variabile di stato */}
-      <div>Padre: {contatore} </div>
-      {/* Visualizzazione conponente figlio - Visualizza lo stesso valore, passato nelle props */}
-      <Display contatore={contatore} />
-      {/* Pulsanti - funzioni passate come parametro. Poi messe onClick nel componente */}
-      <Button func={incrementCont} name={`Increment ${contatore + 1}`} />
-      <Button func={decrementCont} name={`Decrement ${contatore - 1}`} />
+      {/* Barra di navigazione - sempre presente */}
+      <NavBar data={navBarConf} selected={page} />
+      {/* Pagina contatore */}
+      {page == 1 && <PageCont />}
       {/* Componente List con l'aggiunta dei dati presi dall url */}
-      <ListWithGists />
+      {page == 2 && <PageList />}
     </div>
   );
 }

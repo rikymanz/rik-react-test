@@ -1,0 +1,18 @@
+.navBar{
+  height:50px;
+  width:100%;
+  border-bottom:2px solid blue;
+}
+.navBar > div{
+  height:100%;
+  display:inline-block;
+  color:blue;
+  cursor:pointer;
+}
+.navBar > div > div{
+  padding:10px;
+}
+.navBar-selected{
+  background:blue;
+  color:white !important;
+}

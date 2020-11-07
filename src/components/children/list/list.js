@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Row from './../row/row'
+import Row from '../row/row'
 
 const List = ({data}) => (
   data.fulfilled && (
